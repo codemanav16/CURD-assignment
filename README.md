@@ -98,13 +98,6 @@ Open the printed Vite dev URL (defaults to `http://localhost:5173`).
 - Store the returned JWT in `localStorage` (frontend already does this) and send it as `Authorization: Bearer <token>` for protected endpoints.
 - Admin signup requires the `ADMIN_INVITE_CODE` value.
 
----
-
-## 🧪 Quick Checks
-- `GET http://localhost:3001/health`
-- `GET http://localhost:3001/api/docs` to explore and try requests
-
----
 
 ## 📂 Structure (high level)
 - `backend/` Express app with Mongo models and auth/posts routes
