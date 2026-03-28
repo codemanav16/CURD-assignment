@@ -102,3 +102,6 @@ Open the printed Vite dev URL (defaults to `http://localhost:5173`).
 ## 📂 Structure (high level)
 - `backend/` Express app with Mongo models and auth/posts routes
 - `frontend/` Vite React UI hitting the API
+
+## 🌐 Deployed Link
+- Frontend (Vercel): https://curd-assignment-ecru.vercel.app/
