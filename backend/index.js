@@ -18,7 +18,6 @@ const serverUrl = process.env.SWAGGER_SERVER_URL || `http://localhost:${port}`
 app.use(cors())
 app.use(express.json())
 
-// Swagger setup
 const swaggerSpec = swaggerJsdoc({
   definition: {
     openapi: '3.0.0',
@@ -240,7 +239,6 @@ const swaggerSpec = swaggerJsdoc({
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.get('/api/docs.json', (req, res) => res.json(swaggerSpec))
 
-// Mongo connection
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/auth-demo'
 mongoose.connect(mongoUri, { autoIndex: true }).then(() => {
   console.log('Connected to MongoDB')
@@ -249,7 +247,6 @@ mongoose.connect(mongoUri, { autoIndex: true }).then(() => {
   process.exit(1)
 })
 
-// Schemas
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   email: { type: String, required: true, unique: true, lowercase: true, trim: true },
@@ -267,7 +264,6 @@ const postSchema = new mongoose.Schema({
 
 const Post = mongoose.model('Post', postSchema)
 
-// Helpers
 const buildToken = (user) => {
   const payload = { sub: user._id.toString(), role: user.role, email: user.email }
   return jwt.sign(payload, jwtSecret, { expiresIn: '2h' })
@@ -292,7 +288,6 @@ const requireRole = (role) => (req, res, next) => {
   next()
 }
 
-// Routes
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'backend' })
 })
@@ -359,7 +354,6 @@ app.get('/api/admin/summary', auth, requireRole('admin'), (req, res) => {
   res.json({ message: 'Admin content', email: req.user.email })
 })
 
-// Public/read-only posts
 app.get('/api/posts', async (req, res) => {
   try {
     const posts = await Post.find().sort({ createdAt: -1 })
@@ -370,7 +364,6 @@ app.get('/api/posts', async (req, res) => {
   }
 })
 
-// Admin posts CRUD
 app.get('/api/admin/posts', auth, requireRole('admin'), async (req, res) => {
   try {
     const posts = await Post.find().sort({ createdAt: -1 })
