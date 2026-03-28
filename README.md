@@ -42,5 +42,5 @@ It demonstrates a secure, scalable backend system with **JWT authentication**, *
 ## 🛠️ Installation & Setup
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/codemanav16/CURD-assignment
+cd <CURD-assignment>
